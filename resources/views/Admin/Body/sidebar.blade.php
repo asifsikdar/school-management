@@ -57,6 +57,27 @@
           </ul>
         </li>
 		
+        
+        <li class="treeview  {{($prefix == '/setups')?'active':''}}">
+          <a href="#">
+            <i data-feather="mail"></i> <span>Setup Management</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('student.class.view')}}"><i class="ti-more"></i>Student Class</a></li>
+            <li><a href="{{route('student.year.view')}}"><i class="ti-more"></i>Student Year</a></li>
+            <li><a href="{{route('student.group.view')}}"><i class="ti-more"></i>Student Group</a></li>
+            <li><a href="{{route('student.shift.view')}}"><i class="ti-more"></i>Student Shift</a></li>
+            <li><a href="{{route('student.fee.cat.view')}}"><i class="ti-more"></i>Student Fee Category</a></li>
+            <li><a href="{{route('student.fee.amount.view')}}"><i class="ti-more"></i>Student Fee Amount</a></li>
+            <li><a href="{{route('student.exam.type.view')}}"><i class="ti-more"></i>Student Exam Type</a></li>
+            <li><a href="{{route('student.school.subject.view')}}"><i class="ti-more"></i>Student Subject</a></li>
+            <li><a href="{{route('student.assign.subject.view')}}"><i class="ti-more"></i>Student Assign Subject</a></li>
+            <li><a href="{{route('designation.view')}}"><i class="ti-more"></i>Designation</a></li>
+          </ul>
+        </li>
     		  
 		 
         <li class="header nav-small-cap">User Interface</li>
