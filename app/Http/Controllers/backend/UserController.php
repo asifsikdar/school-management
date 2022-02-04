@@ -9,7 +9,8 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function UserView(){
-      $data['alldata']=User::all();
+    //   $data['alldata']=User::all();
+      $data['alldata'] = User::where('usertype','Admin')->get();
       return view('backend.user.view_user',$data);
     }
 
@@ -24,10 +25,13 @@ class UserController extends Controller
            'name'  => 'required',
         ]);
         $data = new User();
-        $data->usertype = $request->usertype;
+        $code = rand(0000,9999);
+        $data->usertype = 'Admin';
+        $data->role = $request->role;
         $data->name = $request->name;
         $data->email = $request->email;
-        $data->password = bcrypt($request->password);
+        $data->password = bcrypt($code);
+        $data->code = $code;
         $data->save();
 
         $notification = array(

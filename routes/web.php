@@ -14,6 +14,7 @@ use App\Http\Controllers\backend\setup\ExamTypeController;
 use App\Http\Controllers\backend\setup\SchoolSubjectController;
 use App\Http\Controllers\backend\setup\AssignSubjectController;
 use App\Http\Controllers\backend\setup\DesignationController;
+use App\Http\Controllers\backend\student\StudentRegController;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,6 +148,20 @@ Route::prefix('setups')->group(function(){
     Route::get('/designation/edit/{id}',[DesignationController::class, 'EditDesignation'])->name('designation.edit');
     Route::post('/designation/update/{id}',[DesignationController::class, 'UpdateDesignation'])->name('designation.update');
     Route::get('/designationt/delete/{id}',[DesignationController::class, 'DeleteDesignation'])->name('designation.delete');
+});
+
+// student registration
+
+Route::prefix('students')->group(function(){
+    Route::get('/reg/view',[StudentRegController::class, 'StudentRegView'])->name('student.registration.view');
+    Route::get('/reg/add',[StudentRegController::class, 'StudentRegAdd'])->name('student.registration.add'); 
+    Route::post('/reg/store',[StudentRegController::class, 'StudentRegStore'])->name('student.registration.store'); 
+    Route::get('/reg/edit/{stident_id}',[StudentRegController::class, 'StudentRegEdit'])->name('student.registration.edit'); 
+    Route::post('/reg/update/{stident_id}',[StudentRegController::class, 'StudentRegUpdate'])->name('student.registration.update'); 
+    Route::get('/find/student',[StudentRegController::class, 'FindStudent'])->name('find.student.class.year');  
+    Route::get('/reg/promotion/{stident_id}',[StudentRegController::class, 'StudentRegPromotion'])->name('student.registration.promotion'); 
+    Route::post('/reg/update/promotion/{stident_id}',[StudentRegController::class, 'StudentUpdatePromotion'])->name('student.update.registration.promotion'); 
+
 });
 
 

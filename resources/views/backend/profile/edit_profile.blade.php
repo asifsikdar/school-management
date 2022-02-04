@@ -15,7 +15,7 @@
           <div class="box-body">
             <div class="row">
               <div class="col">
-                  <form method="post" action="{{route('profile.store')}}" enctype="multipart/form-data">
+                  <form method="post" action="{{route('student.registration.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-6">						
