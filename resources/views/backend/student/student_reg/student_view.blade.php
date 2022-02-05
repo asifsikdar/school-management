@@ -87,8 +87,9 @@
                                         border:1px solid black">
                                       </td>
                                       <td>
-                                          <a href="{{route('student.registration.edit',$value->student_id)}}" class="btn btn-info">Edit</a>
-                                          <a href="{{route('student.registration.promotion',$value->student_id)}}" class="btn btn-danger">Delete</a>
+                                        <a href="{{route('student.registration.edit',$value->student_id)}}" class="btn btn-info"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('student.registration.promotion',$value->student_id)}}" class="btn btn-primary"><i class="fa fa-check"></i></a>
+                                        <a target="_blank" href="{{route('student.registration.details.pdf',$value->student_id)}}" class="btn btn-danger"><i class="fa fa-eye"></i></a>
                                       </td>
                                   </tr>
                                   @endforeach
@@ -101,6 +102,7 @@
                                     <th width="5%">SL</th>
                                     <th>Name</th>
                                     <th>Id No</th>
+                                    <th>Roll</th>
                                     <th>Year</th>
                                     <th>Class</th>
                                     @if (Auth::user()->role == 'Admin')
@@ -116,6 +118,7 @@
                                     <td>{{$key+1}}</td>
                                     <td>{{$value['student']['name']}}</td>
                                     <td>{{$value['student']['id_no']}}</td>
+                                    <td>{{$value->roll}}</td>
                                     <td>{{$value['studentyear']['name']}}</td>
                                     <td>{{$value['studentclass']['name']}}</td>
                                     <td>{{$value['student']['code']}}</td>
@@ -124,8 +127,9 @@
                                       border:1px solid black">
                                     </td>
                                     <td>
-                                        <a href="{{route('student.registration.edit',$value->student_id)}}" class="btn btn-info">Edit</a>
-                                        <a href="{{route('student.registration.promotion',$value->student_id)}}" class="btn btn-danger">Promotion</a>
+                                        <a href="{{route('student.registration.edit',$value->student_id)}}" class="btn btn-info"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('student.registration.promotion',$value->student_id)}}" class="btn btn-primary"><i class="fa fa-check"></i></a>
+                                        <a target="_blank" href="{{route('student.registration.details.pdf',$value->student_id)}}" class="btn btn-danger"><i class="fa fa-eye"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

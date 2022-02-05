@@ -15,6 +15,7 @@ use App\Http\Controllers\backend\setup\SchoolSubjectController;
 use App\Http\Controllers\backend\setup\AssignSubjectController;
 use App\Http\Controllers\backend\setup\DesignationController;
 use App\Http\Controllers\backend\student\StudentRegController;
+use App\Http\Controllers\backend\student\StudentRollController;
 
 /*
 |--------------------------------------------------------------------------
@@ -161,7 +162,13 @@ Route::prefix('students')->group(function(){
     Route::get('/find/student',[StudentRegController::class, 'FindStudent'])->name('find.student.class.year');  
     Route::get('/reg/promotion/{stident_id}',[StudentRegController::class, 'StudentRegPromotion'])->name('student.registration.promotion'); 
     Route::post('/reg/update/promotion/{stident_id}',[StudentRegController::class, 'StudentUpdatePromotion'])->name('student.update.registration.promotion'); 
+    Route::get('/reg/details/pdf/{stident_id}',[StudentRegController::class, 'StudentDetailsPdf'])->name('student.registration.details.pdf'); 
 
+    // Student Roll Genarate
+
+    Route::get('/roll/view',[StudentRollController::class, 'StudentRollView'])->name('student.roll.view');
+    Route::get('/reg/getstudents',[StudentRollController::class, 'GetStudent'])->name('student.registration.getstudents');
+    Route::post('/reg/students/rollupdate',[StudentRollController::class, 'StudentRollUpdate'])->name('roll.generate.store');
 });
 
 
