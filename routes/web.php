@@ -16,6 +16,9 @@ use App\Http\Controllers\backend\setup\AssignSubjectController;
 use App\Http\Controllers\backend\setup\DesignationController;
 use App\Http\Controllers\backend\student\StudentRegController;
 use App\Http\Controllers\backend\student\StudentRollController;
+use App\Http\Controllers\backend\student\RegistrationFeeController;
+use App\Http\Controllers\backend\student\MonthlyFeeController;
+use App\Http\Controllers\backend\student\ExamFeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +38,8 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('Admin.index');
 })->name('dashboard');
+
+Route::group(['middleware' => 'auth'],function(){
 
 // student All Route
 Route::get('/admin/logout',[AdminController::class, 'Logout'])->name('admin.logout');
@@ -167,8 +172,31 @@ Route::prefix('students')->group(function(){
     // Student Roll Genarate
 
     Route::get('/roll/view',[StudentRollController::class, 'StudentRollView'])->name('student.roll.view');
-    Route::get('/reg/getstudents',[StudentRollController::class, 'GetStudent'])->name('student.registration.getstudents');
-    Route::post('/reg/students/rollupdate',[StudentRollController::class, 'StudentRollUpdate'])->name('roll.generate.store');
+    Route::get('/roll/getstudents',[StudentRollController::class, 'GetStudent'])->name('student.registration.getstudents');
+    Route::post('/roll/students/rollupdate',[StudentRollController::class, 'StudentRollUpdate'])->name('roll.generate.store');
+
+    // Student Registration Fee
+
+     Route::get('/reg/fee/view',[RegistrationFeeController::class, 'RegistrationFee'])->name('registration.fee.view');
+     Route::get('/reg/fee/classwise/view',[RegistrationFeeController::class, 'RegistrationFeeclasswise'])->name('student.registration.fee.classwise.get');
+     Route::get('/reg/fee/payslip',[RegistrationFeeController::class, 'RegistrationFeePayslip'])->name('student.registration.fee.payslip');
+
+    // Student Registration Fee
+
+    Route::get('/monthly/fee/view',[MonthlyFeeController::class, 'MonthlyFeeView'])->name('monthly.fee.view');
+    Route::get('/monthly/fee/get',[MonthlyFeeController::class, 'MonthlyFeeGet'])->name('student.monthly.fee.get');
+    Route::get('/monthly/fee/payslip',[MonthlyFeeController::class, 'MonthlyFeepayslip'])->name('student.monthly.fee.payslip');
+    Route::get('/monthly/fee/payment/view',[MonthlyFeeController::class, 'MonthlyFeePaymentView'])->name('student.monthly.fee.payment.view');
+
+    // Student Registration Fee
+
+     Route::get('/exam/fee/view',[ExamFeeController::class, 'examFeeView'])->name('exam.fee.view');
+     Route::get('/exam/fee/get',[ExamFeeController::class, 'ExamFeeGet'])->name('student.exam.fee.get');
+     Route::get('/exaam/fee/payslip',[ExamFeeController::class, 'ExamFeepayslip'])->name('student.exam.fee.payslip');
+     Route::get('/monthly/fee/payment/view',[ExamFeeController::class, 'MonthlyFeePaymentView'])->name('student.monthly.fee.payment.view');
 });
+
+});
+
 
 
