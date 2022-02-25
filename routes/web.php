@@ -20,6 +20,7 @@ use App\Http\Controllers\backend\student\RegistrationFeeController;
 use App\Http\Controllers\backend\student\MonthlyFeeController;
 use App\Http\Controllers\backend\student\ExamFeeController;
 use App\Http\Controllers\backend\employee\EmployeeRegController;
+use App\Http\Controllers\backend\employee\EmployeeSalaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -206,7 +207,13 @@ Route::prefix('employee')->group(function(){
     Route::post('/registration/update/{id}',[EmployeeRegController::class, 'EmployeeRegUpdate'])->name('employee.registration.update');
     Route::get('/registration/details/{id}',[EmployeeRegController::class, 'EmployeeRegDetails'])->name('employee.registration.details');
 
-
+// employee salary all route
+    Route::get('/salary/view',[EmployeeSalaryController::class, 'EmployeeSalaryView'])->name('employee.salary.view');
+    Route::get('/salary/increment/{id}',[EmployeeSalaryController::class, 'EmployeeSalaryIncrement'])->name('employee.increment.salary');
+    Route::post('/salary/increment/details/{id}',[EmployeeSalaryController::class, 'EmployeeSalaryIncrementStore'])->name('update.increment.store');
+    Route::get('/salary/edit/{id}',[EmployeeSalaryController::class, 'EmployeeIncrementDetails'])->name('employee.increment.details');
+    Route::post('/registration/update/{id}',[EmployeeSalaryController::class, 'EmployeeRegUpdate'])->name('employee.registration.update');
+    Route::get('/registration/details/{id}',[EmployeeSalaryController::class, 'EmployeeRegDetails'])->name('employee.registration.details');
 });
 
 });

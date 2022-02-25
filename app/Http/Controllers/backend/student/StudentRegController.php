@@ -115,11 +115,11 @@ class StudentRegController extends Controller
         });
 
         $notification = array(
-            'message' => 'Student Registration Inserted Sussessfully',
+            'message' => 'Employee Registration Inserted Sussessfully',
             'alert-type'=> 'success'
           );
   
-        return redirect()->route('student.registration.view')->with($notification);
+        return redirect()->route('employee.registration.view')->with($notification);
 
     }
 

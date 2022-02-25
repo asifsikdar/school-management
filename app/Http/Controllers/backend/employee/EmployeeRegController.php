@@ -36,6 +36,80 @@ class EmployeeRegController extends Controller
         return view('backend.employee.employee_edit',$data);
     }
 
+    public function EmployeeRegStore(Request $request){
+        DB::transaction(function() use($request){ 
+            $checkYear = date('Ym',strtotime($request->join_date));
+            $employee = User::where('usertype','Employee')->orderBy('id','DESC')->first();
+
+            if($employee == null){
+                $firstReg = 0;
+                $employee_id = $firstReg+1;
+                if($studentId < 10){
+                    $id_no = '000'.$employee_id;
+                }elseif($employee_id < 100){
+                    $id_no = '00'.$employee_id;
+                }elseif($employee_id < 1000){
+                    $id_no = '0'.$employee_id;
+                }
+            }else{
+                $employee = User::where('usertype','Employee')->orderBy('id','DESC')->first()->id;
+                $employee_id = $employee+1;
+                if($employee_id < 10){
+                    $id_no = '000'.$employee_id;
+                }elseif($employee_id < 100){
+                    $id_no = '00'.$employee_id;
+                }elseif($employee_id < 1000){
+                    $id_no = '0'.$employee_id;
+                }
+            }
+
+            $final_id_no = $checkYear.$id_no;
+            $user = new User();
+            $code = rand(0000,9999);
+            $user->id_no = $final_id_no;
+            $user->password = bcrypt($code);
+            $user->usertype = 'Employee';
+            $user->code = $code;
+            $user->name = $request->name;
+            $user->fname = $request->fname;
+            $user->mname = $request->mname;
+            $user->mobile = $request->mobile;
+            $user->address = $request->address;
+            $user->gender = $request->gender;
+            $user->religion = $request->religion;
+            $user->salary = $request->salary;
+            $user->designation_id = $request->designation_id;
+            $user->dob = date('Y-m-d',strtotime($request->dob));
+            $user->join_date = date('Y-m-d',strtotime($request->join_date));
+
+            if($request->file('image')){
+                $file = $request->file('image');
+                @unlink(public_path('upload/employee_image/'.$user->image));
+                $filename = date('YmdHi').$file->getClientOriginalName();
+                $file->move(public_path('upload/employee_image'),$filename);
+                $user['image'] = $filename;
+              }
+
+              $user->save();
+
+               $employee_salary = new EmployeeSalaryLog();
+            $employee_salary->employee_id = $user->id;
+            $employee_salary->effected_salary = date('Y-m-d',strtotime($request->join_date));
+            $employee_salary->previous_salary = $request->salary;
+            $employee_salary->present_salary = $request->salary;
+            $employee_salary->increment_salary = '0';
+            $employee_salary->save(); 
+            
+        });
+
+        $notification = array(
+            'message' => 'Student Registration Inserted Sussessfully',
+            'alert-type'=> 'success'
+          );
+  
+        return redirect()->route('employee.registration.view')->with($notification);
+
+    }
     public function EmployeeRegUpdate(Request $request,$id){
         $user =  User::find($id);
             $user->name = $request->name;
@@ -50,7 +124,7 @@ class EmployeeRegController extends Controller
 
             if($request->file('image')){
                 $file = $request->file('image');
-                @unlink(public_path('upload/student_image/'.$user->image));
+                @unlink(public_path('upload/employee_image/'.$user->image));
                 $filename = date('YmdHi').$file->getClientOriginalName();
                 $file->move(public_path('upload/employee_image'),$filename);
                 $user['image'] = $filename;
