@@ -19,6 +19,7 @@ use App\Http\Controllers\backend\student\StudentRollController;
 use App\Http\Controllers\backend\student\RegistrationFeeController;
 use App\Http\Controllers\backend\student\MonthlyFeeController;
 use App\Http\Controllers\backend\student\ExamFeeController;
+use App\Http\Controllers\backend\employee\EmployeeRegController;
 
 /*
 |--------------------------------------------------------------------------
@@ -194,6 +195,18 @@ Route::prefix('students')->group(function(){
      Route::get('/exam/fee/get',[ExamFeeController::class, 'ExamFeeGet'])->name('student.exam.fee.get');
      Route::get('/exaam/fee/payslip',[ExamFeeController::class, 'ExamFeepayslip'])->name('student.exam.fee.payslip');
      Route::get('/monthly/fee/payment/view',[ExamFeeController::class, 'MonthlyFeePaymentView'])->name('student.monthly.fee.payment.view');
+});
+
+
+Route::prefix('employee')->group(function(){
+    Route::get('/registration/view',[EmployeeRegController::class, 'EmployeeRegView'])->name('employee.registration.view');
+    Route::get('/registration/add',[EmployeeRegController::class, 'EmployeeRegAdd'])->name('employee.registration.add');
+    Route::post('/registration/store',[EmployeeRegController::class, 'EmployeeRegStore'])->name('employee.registration.store');
+    Route::get('/registration/edit/{id}',[EmployeeRegController::class, 'EmployeeRegEdit'])->name('employee.registration.edit');
+    Route::post('/registration/update/{id}',[EmployeeRegController::class, 'EmployeeRegUpdate'])->name('employee.registration.update');
+    Route::get('/registration/details/{id}',[EmployeeRegController::class, 'EmployeeRegDetails'])->name('employee.registration.details');
+
+
 });
 
 });
