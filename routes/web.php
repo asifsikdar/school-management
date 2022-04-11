@@ -21,6 +21,7 @@ use App\Http\Controllers\backend\student\MonthlyFeeController;
 use App\Http\Controllers\backend\student\ExamFeeController;
 use App\Http\Controllers\backend\employee\EmployeeRegController;
 use App\Http\Controllers\backend\employee\EmployeeSalaryController;
+use App\Http\Controllers\backend\employee\EmployeeLeaveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -211,9 +212,15 @@ Route::prefix('employee')->group(function(){
     Route::get('/salary/view',[EmployeeSalaryController::class, 'EmployeeSalaryView'])->name('employee.salary.view');
     Route::get('/salary/increment/{id}',[EmployeeSalaryController::class, 'EmployeeSalaryIncrement'])->name('employee.increment.salary');
     Route::post('/salary/increment/details/{id}',[EmployeeSalaryController::class, 'EmployeeSalaryIncrementStore'])->name('update.increment.store');
-    Route::get('/salary/edit/{id}',[EmployeeSalaryController::class, 'EmployeeIncrementDetails'])->name('employee.increment.details');
-    Route::post('/registration/update/{id}',[EmployeeSalaryController::class, 'EmployeeRegUpdate'])->name('employee.registration.update');
-    Route::get('/registration/details/{id}',[EmployeeSalaryController::class, 'EmployeeRegDetails'])->name('employee.registration.details');
+    Route::get('/salary/increment/list/{id}',[EmployeeSalaryController::class, 'EmployeeIncrementDetails'])->name('employee.increment.details');
+
+// employee leave all route    
+    Route::get('/leave/view',[EmployeeLeaveController::class, 'EmployeeLeaveView'])->name('employee.leave.view');
+    Route::get('/leave/add',[EmployeeLeaveController::class, 'EmployeeLeaveAdd'])->name('employee.leave.add');
+    Route::post('/leave/store',[EmployeeLeaveController::class, 'EmployeeLeaveStore'])->name('employee.leave.store');
+    Route::get('/leave/edit/{id}',[EmployeeLeaveController::class, 'EmployeeLeaveEdit'])->name('employee.leave.edit');
+    Route::get('/leave/delete/{id}',[EmployeeLeaveController::class, 'EmployeeLeaveDelete'])->name('employee.leave.delete');
+
 });
 
 });

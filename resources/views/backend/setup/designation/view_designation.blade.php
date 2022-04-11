@@ -10,7 +10,7 @@
           <div class="col-12">
               <div class="box">
                   <div class="box-header">						
-                      <h3 class="box-title">Add Designation</h3>
+                      <h3 class="box-title">Designation List</h3>
                       <a href="{{route('designation.add')}}" style="float: right;" class="btn btn-rounded btn-success mb-5">Add Designation</a>
                   </div>
                   <div class="box-body">

@@ -10,8 +10,8 @@
           <div class="col-12">
               <div class="box">
                   <div class="box-header">						
-                      <h3 class="box-title">Employee Increment Salary List</h3>
-                      {{-- <a href="{{route('employee.registration.add')}}" style="float: right;" class="btn btn-rounded btn-success mb-5">Add Employee Salary</a> --}}
+                      <h3 class="box-title">Employee Leave</h3>
+                      <a href="{{route('employee.leave.add')}}" style="float: right;" class="btn btn-rounded btn-success mb-5">Add Employee Leave</a>
                   </div>
                   <div class="box-body">
                       <div class="table-responsive">
@@ -19,20 +19,27 @@
                               <thead>
                                   <tr>
                                       <th width="5%">SL</th>
-                                      <th>Previous Salary</th>
-                                      <th>Increment Salary</th>
-                                      <th>Present Salary</th>
-                                      <th>Effected Date</th>
+                                      <th>Name</th>
+                                      <th>Id No</th>
+                                      <th>Purpose</th>
+                                      <th>Start Date</th>
+                                      <th>End Date</th>
+                                      <th width="25%">Action</th>
                                   </tr>
                               </thead>
                               <tbody>
-                                  @foreach ($salary_log as $key => $value)
+                                  @foreach ($allData as $key => $leave)
                                   <tr>
                                       <td>{{$key+1}}</td>
-                                      <td>{{$value->previous_salary}}</td>
-                                      <td>{{$value->increment_salary}}</td>
-                                      <td>{{$value->present_salary}}</td>
-                                      <td>{{$value->effected_salary}}</td>
+                                      <td>{{$leave['user']['name']}}</td>
+                                      <td>{{$leave['user']['id_no']}}</td>
+                                      <td>{{$leave['purpose']['name']}}</td>
+                                      <td>{{$leave->start_date}}</td>
+                                      <td>{{$leave->end_date}}</td>
+                                      <td>
+                                          <a href="{{route('employee.leave.edit',$leave->id)}}" class="btn btn-info">Edit</a>
+                                          <a href="{{route('employee.leave.delete',$leave->id)}}" class="btn btn-danger">Delete</a>
+                                      </td>
                                   </tr>
                                   @endforeach
                               </tbody>
